@@ -37,18 +37,8 @@ namespace BiztalkAdminAPI
                     Version = "v1",
                     Title = "BizTalk Admin API",
                     Description = "Rest API for administering Biztalk. Has operations that are not included in management api shipped with BizTalk 2016 or 2020 and few other interesting things.",
-                    //TermsOfService = new Uri("https://example.com/terms"),
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Pekka Huuskonen",
-                        Email = string.Empty,
-                        Url = new Uri("https://www.pekkahuuskonen.com"),
-                    },
-                    License = new OpenApiLicense
-                    {
-                        Name = "Use under MIT",
-                        Url = new Uri("https://mit-license.org/e"),
-                    }
+                    //TermsOfService = new Uri("https://example.com/terms")
+                  
                 });
 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

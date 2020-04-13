@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Management;
-using System.Threading.Tasks;
 using BiztalkAdminAPI.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BiztalkAdminAPI.Controllers
@@ -25,8 +23,10 @@ namespace BiztalkAdminAPI.Controllers
             try
             {
                 //Create EnumerationOptions and run wql query 
-                EnumerationOptions enumOptions = new EnumerationOptions();
-                enumOptions.ReturnImmediately = false;
+                EnumerationOptions enumOptions = new EnumerationOptions
+                {
+                    ReturnImmediately = false
+                };
 
                 //Search for all HostInstances 
                 ManagementObjectSearcher searchObject = new ManagementObjectSearcher("root\\MicrosoftBizTalkServer", "Select * from MSBTS_HostInstance", enumOptions);
@@ -34,24 +34,26 @@ namespace BiztalkAdminAPI.Controllers
                 //Enumerate through the resultset 
                 foreach (ManagementObject inst in searchObject.Get())
                 {
-                    HostInstance hostInstance = new HostInstance();
-                    hostInstance.Caption = inst["Caption"]!=null?inst["Caption"].ToString():"";
-                    hostInstance.ClusterInstanceType = inst["ClusterInstanceType"] != null ? inst["ClusterInstanceType"].ToString() : "";
-                    hostInstance.ConfigurationState = inst["ConfigurationState"] != null ? inst["ConfigurationState"].ToString() : "";
-                    hostInstance.Description = inst["Description"] != null ? inst["Description"].ToString() : "";
-                    hostInstance.HostName = inst["HostName"] != null ? inst["HostName"].ToString() : "";
-                    hostInstance.HostType = inst["HostType"] != null ? Enum.GetName(typeof(HostInstance.HostTypeEnum),inst["HostType"]) : "";
-                    hostInstance.InstallDate = inst["InstallDate"] != null ? inst["InstallDate"].ToString() : "";
-                    hostInstance.IsDisabled = inst["IsDisabled"] != null ? inst["IsDisabled"].ToString() : "";
-                    hostInstance.Logon = inst["Logon"] != null ? inst["Logon"].ToString() : "";
-                    hostInstance.MgmtDbNameOverride = inst["MgmtDbNameOverride"] != null ? inst["MgmtDbNameOverride"].ToString() : "";
-                    hostInstance.MgmtDbServerOverride = inst["MgmtDbServerOverride"] != null ? inst["MgmtDbServerOverride"].ToString() : "";
-                    hostInstance.Name = inst["Name"] != null ? inst["Name"].ToString() : "";
-                    hostInstance.NTGroupName = inst["NTGroupName"] != null ? inst["NTGroupName"].ToString() : "";
-                    hostInstance.RunningServer = inst["RunningServer"] != null ? inst["RunningServer"].ToString() : "";
-                    hostInstance.ServiceState = inst["ServiceState"] != null ? Enum.GetName(typeof(HostInstance.ServiceStateEnum), inst["ServiceState"]) : "";
-                    hostInstance.Status = inst["Status"] != null ? inst["Status"].ToString() : "";
-                    hostInstance.UniqueID = inst["UniqueID"] != null ? inst["UniqueID"].ToString() : "";
+                    HostInstance hostInstance = new HostInstance
+                    {
+                        Caption = inst["Caption"] != null ? inst["Caption"].ToString() : "",
+                        ClusterInstanceType = inst["ClusterInstanceType"] != null ? inst["ClusterInstanceType"].ToString() : "",
+                        ConfigurationState = inst["ConfigurationState"] != null ? inst["ConfigurationState"].ToString() : "",
+                        Description = inst["Description"] != null ? inst["Description"].ToString() : "",
+                        HostName = inst["HostName"] != null ? inst["HostName"].ToString() : "",
+                        HostType = inst["HostType"] != null ? Enum.GetName(typeof(HostInstance.HostTypeEnum), inst["HostType"]) : "",
+                        InstallDate = inst["InstallDate"] != null ? inst["InstallDate"].ToString() : "",
+                        IsDisabled = inst["IsDisabled"] != null ? inst["IsDisabled"].ToString() : "",
+                        Logon = inst["Logon"] != null ? inst["Logon"].ToString() : "",
+                        MgmtDbNameOverride = inst["MgmtDbNameOverride"] != null ? inst["MgmtDbNameOverride"].ToString() : "",
+                        MgmtDbServerOverride = inst["MgmtDbServerOverride"] != null ? inst["MgmtDbServerOverride"].ToString() : "",
+                        Name = inst["Name"] != null ? inst["Name"].ToString() : "",
+                        NTGroupName = inst["NTGroupName"] != null ? inst["NTGroupName"].ToString() : "",
+                        RunningServer = inst["RunningServer"] != null ? inst["RunningServer"].ToString() : "",
+                        ServiceState = inst["ServiceState"] != null ? Enum.GetName(typeof(HostInstance.ServiceStateEnum), inst["ServiceState"]) : "",
+                        Status = inst["Status"] != null ? inst["Status"].ToString() : "",
+                        UniqueID = inst["UniqueID"] != null ? inst["UniqueID"].ToString() : ""
+                    };
 
                     hostInstances.Add(hostInstance);
                 }
@@ -80,8 +82,10 @@ namespace BiztalkAdminAPI.Controllers
         {
             if (state == "Start" || state == "Stop")
             {
-                EnumerationOptions enumOptions = new EnumerationOptions();
-                enumOptions.ReturnImmediately = false;
+                EnumerationOptions enumOptions = new EnumerationOptions
+                {
+                    ReturnImmediately = false
+                };
 
                 ManagementObjectSearcher searchObject = new ManagementObjectSearcher("root\\MicrosoftBizTalkServer", "Select * from MSBTS_HostInstance Where RunningServer='" + servername + "' And HostName='" + hostname + "'", enumOptions);
 

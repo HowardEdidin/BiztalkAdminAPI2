@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Management;
-using System.Threading.Tasks;
 using BiztalkAdminAPI.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BiztalkAdminAPI.Controllers
@@ -25,8 +21,10 @@ namespace BiztalkAdminAPI.Controllers
             try
             {
                 //Create EnumerationOptions and run wql query 
-                EnumerationOptions enumOptions = new EnumerationOptions();
-                enumOptions.ReturnImmediately = false;
+                EnumerationOptions enumOptions = new EnumerationOptions
+                {
+                    ReturnImmediately = false
+                };
 
                 //Search count of running HostInstances 
                 ManagementObjectSearcher searchObject = new ManagementObjectSearcher("root\\MicrosoftBizTalkServer", "Select * from MSBTS_HostInstance where ServiceState=4 and HostType=1", enumOptions);
