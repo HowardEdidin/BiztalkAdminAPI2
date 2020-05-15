@@ -36,8 +36,8 @@ namespace BiztalkAdminAPI
                 {
                     Version = "v1",
                     Title = "BizTalk Admin API",
-                    Description = "Rest API for administering Biztalk. Has operations that are not included in management api shipped with BizTalk 2016 or 2020 and few other interesting things.",
-                    //TermsOfService = new Uri("https://example.com/terms")
+                    Description = "Rest API for administering Biztalk. Has operations that are not included in management api shipped with BizTalk 2016 or 2020 and few other interesting things."
+                   
                   
                 });
 
